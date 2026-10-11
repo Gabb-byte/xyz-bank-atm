@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#462338">
+  <title>XYZ BANK | Digital ATM</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="XYZ BANK ATM home">
+        <span class="brand-mark">X</span><span>XYZ BANK</span>
+      </a>
+      <div class="side-label">YOUR ATM</div>
+      <div class="side-link active"><span class="side-icon">▦</span>Overview</div>
+      <div class="side-link"><span class="side-icon">↕</span>Transactions</div>
+      <div class="side-link"><span class="side-icon">♧</span>Account</div>
+      <div class="sidebar-bottom"><div class="secure-dot"></div><div><strong>Secure session</strong><small>Your connection is protected</small></div></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar"><div class="mobile-brand"><span class="brand-mark">X</span> XYZ BANK</div><div class="topbar-right"><span class="live-dot"></span> ATM SERVICES <span class="top-divider"></span><span id="clock">--:--</span></div></header>
+      <div class="content">
+        <section id="loginView" class="login-layout">
+          <div class="welcome-copy"><div class="eyebrow">YOUR MONEY, WITH YOU</div><h1>Banking made<br><em>simple.</em></h1><p>Access your account and take care of everyday banking in just a few steps.</p><div class="welcome-note"><span>✦</span> A better way to bank, right here.</div></div>
+          <form id="loginForm" class="login-card">
+            <div class="card-icon">↗</div><div class="eyebrow">WELCOME BACK</div><h2>Sign in to your account</h2><p class="muted">Enter your account details to continue.</p>
+            <label for="account">Account number</label><input id="account" inputmode="numeric" maxlength="8" placeholder="e.g. 10010001" required>
+            <label for="pin">4-digit PIN</label><input id="pin" inputmode="numeric" maxlength="4" type="password" placeholder="••••" required>
+            <div id="loginError" class="error" aria-live="polite"></div><button class="button primary full" type="submit">Continue <span>→</span></button>
+            <div class="demo-hint"><span>ⓘ</span> Demo: 10010001 / PIN 1234</div>
+          </form>
+        </section>
+
+        <section id="dashboardView" class="dashboard hidden">
+          <div class="page-heading"><div><div class="eyebrow">PERSONAL BANKING</div><h1 id="greeting">Good day</h1><p class="muted">Here’s your account at a glance.</p></div><button id="logoutButton" class="button ghost">Sign out <span>↗</span></button></div>
+          <div class="dashboard-grid">
+            <article class="balance-card"><div class="balance-top"><span>AVAILABLE BALANCE</span><span class="balance-chip"><i></i> ACTIVE</span></div><div class="balance-amount" id="balanceAmount">$0.00</div><div class="balance-bottom"><span>Everyday checking</span><span id="accountLabel">•••• 0000</span></div><div class="card-decoration"></div></article>
+            <article class="quick-card"><div class="eyebrow">QUICK ACTIONS</div><h2>What would you like to do?</h2><div class="action-row"><button class="action-button" data-action="deposit"><span class="action-icon green">＋</span><span><b>Deposit cash</b><small>Add money to your account</small></span><span class="action-arrow">→</span></button><button class="action-button" data-action="withdraw"><span class="action-icon blue">－</span><span><b>Withdraw cash</b><small>Take out money securely</small></span><span class="action-arrow">→</span></button></div></article>
+          </div>
+          <div class="lower-grid"><article class="activity-card"><div class="section-head"><div><div class="eyebrow">ACCOUNT ACTIVITY</div><h2>Recent transactions</h2></div><span class="activity-tag">THIS SESSION</span></div><div id="emptyActivity" class="empty-activity"><div class="empty-icon">⌁</div><div><b>No transactions yet</b><p>Your recent deposits and withdrawals will appear here.</p></div></div><div id="activityList"></div></article><aside class="help-card"><div class="help-icon">?</div><div class="eyebrow">HERE TO HELP</div><h2>Need a hand?</h2><p>Choose an action above to make a deposit or withdrawal. Your balance updates instantly.</p><div class="help-line"></div><div class="help-foot"><span class="secure-dot"></span> Your session is private and secure</div></aside></div>
+        </section>
+      </div>
+      <footer><span>© 2026 XYZ BANK</span><span>Digital ATM · Student project</span></footer>
+    </main>
+  </div>
+
+  <div id="transactionModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop" data-close="true"></div><form id="transactionForm" class="modal-card"><button class="modal-close" type="button" data-close="true" aria-label="Close">×</button><div id="modalIcon" class="card-icon">＋</div><div class="eyebrow">ACCOUNT TRANSACTION</div><h2 id="modalTitle">Deposit cash</h2><p class="muted">Enter the amount you’d like to process.</p><label for="amount">Amount</label><div class="amount-input"><span>$</span><input id="amount" type="number" min="0.01" step="0.01" placeholder="0.00" required></div><div id="transactionError" class="error" aria-live="polite"></div><button id="submitTransaction" class="button primary full" type="submit">Confirm deposit <span>→</span></button><button class="button cancel full" type="button" data-close="true">Cancel</button></form></div>
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

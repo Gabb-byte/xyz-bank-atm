@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: xyz-bank-atm-demo
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true

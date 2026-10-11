@@ -3,7 +3,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc \
+    && apt-get install -y --no-install-recommends build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
@@ -13,5 +13,4 @@ COPY . .
 
 ENV PYTHONUNBUFFERED=1
 
-# Keep one worker because the C engine keeps the demo balances in its memory.
 CMD ["sh", "-c", "gunicorn --workers 1 --threads 1 --bind 0.0.0.0:${PORT:-10000} app:app"]
